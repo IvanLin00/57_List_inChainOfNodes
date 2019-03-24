@@ -3,21 +3,25 @@
  */
 
 public class List_inChainOfNodes{
-    private Node headReference;
-    private int numberOfElements;
-    private List listOfNodes;
-    /**
+     private Node headRef;
+     /**
       Construct an empty list
      */
-    public List_inChainOfNodes(){
-	headReference = new Node
-
-    /**
+     public List_inChainOfNodes(){
+		headRef = new Node(null);
+	 }
+     /**
       @return the number of elements in this list
      */
-    public int size() {
-	return numberOfElements;
-    }
+     public int size() {
+		int i = 0;
+		Node n = headRef;
+		while (n.getCargoReference()!= null){
+			i += 1;
+			n = n.getReferenceToNextNode();
+		}
+		return i;
+	 }
 
     
      /**
@@ -25,16 +29,24 @@ public class List_inChainOfNodes{
        format:
            # elements [element0,element1,element2,] 
       */
-    // public String toString() {
-    // }
+     public String toString() {
+		 String s = "[";
+		 Node nextNode = headRef;
+		 while (nextNode.getCargoReference() != null){
+			 s += nextNode.getCargoReference() + ", ";
+			 nextNode = nextNode.getReferenceToNextNode();
+		 }
+		 return s + "]";
+     }
     
     
-    /**
+     /**
       Append @value to the head of this list.
 
       @return true, in keeping with conventions yet to be discussed
      */
      public boolean addAsHead( Object val) {
-        return true;
+		 headRef = new Node(val,headRef);
+		 return true;
      }
 }
