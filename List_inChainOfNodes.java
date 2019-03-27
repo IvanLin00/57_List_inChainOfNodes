@@ -46,17 +46,19 @@ public class List_inChainOfNodes{
       @return true, in keeping with conventions yet to be discussed
      */
      public boolean addAsHead( Object val) {
-		 headRef = new Node(val,headRef);
+		 add(0,val);
 		 return true;
      }
 	 
-	 public Object set(int index, Object newValue){ //works
+	 private Node getNodeAtIndex(int index){
 		 Node n = headRef;
 		 for (int i = 0; i<index; i++){
 			 n = n.getReferenceToNextNode();
 		 }
-		 Object returnValue = n.getCargoReference();
-		 n = new Node(newValue, n.getReferenceToNextNode());
+		 return n;
+	 }
+	 public Object set(int index, Object newValue){
+		 Node n = new Node(newValue, getNodeAtIndex(index).getReferenceToNextNode());
 		 for(int counter = 0; counter < index; counter++){
 			 Node n2 = headRef;
 			 for (int i = counter; i<index-1; i++){
@@ -65,24 +67,16 @@ public class List_inChainOfNodes{
 			 n = new Node(n2.getCargoReference(),n);
 		 }
 		 headRef = n;
-		 return returnValue;	 
+		 return get(index);	 
 	 }
 
-	 public Object get(int index){ //works
-		 Node n = headRef;
-		 for (int i = 0; i<index; i++){
-			 n = n.getReferenceToNextNode();
-		 }
+	 public Object get(int index){
+		 Node n = getNodeAtIndex(index);
 		 return n.getCargoReference();
 	 }
 	 
-	 public Object remove(int index){ //works
-		 Node n = headRef;
-		 for (int i = 0; i<index;i++){
-			 n = n.getReferenceToNextNode();
-		 }
-		 Object returnValue = n.getCargoReference();
-		 n = n.getReferenceToNextNode();
+	 public Object remove(int index){
+		 Node n = getNodeAtIndex(index).getReferenceToNextNode();
 		 for(int counter = 0; counter < index; counter++){
 			 Node n2 = headRef;
 			 for (int i = counter; i<index-1; i++){
@@ -91,15 +85,11 @@ public class List_inChainOfNodes{
 			 n = new Node(n2.getCargoReference(),n);
 		 }
 		 headRef = n;
-		 return returnValue;
+		 return get(index);
 	 }
 	 
 	 public void add(int index, Object val){
-		 Node n = headRef;
-		 for (int i = 0; i<index; i++){
-			 n = n.getReferenceToNextNode();
-		 }
-		 n = new Node(val, n);
+		 Node n = new Node(val, getNodeAtIndex(index));
 		 for(int counter = 0; counter < index; counter++){
 			 Node n2 = headRef;
 			 for (int i = counter; i<index-1; i++){
