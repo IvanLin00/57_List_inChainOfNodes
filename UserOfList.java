@@ -51,7 +51,7 @@ public class UserOfList {
 		System.out.println("current list: " + list.toString());
 		
 		//tests add
-		list.add(3, "a");
+		list.add(1, "a");
 		System.out.println("current list: " + list.toString());
     }
 }

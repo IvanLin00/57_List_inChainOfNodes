@@ -59,15 +59,10 @@ public class List_inChainOfNodes{
 	 }
 	 public Object set(int index, Object newValue){
 		 Node n = new Node(newValue, getNodeAtIndex(index).getReferenceToNextNode());
-		 for(int counter = 0; counter < index; counter++){
-			 Node n2 = headRef;
-			 for (int i = counter; i<index-1; i++){
-				n2 = n2.getReferenceToNextNode();
-			 }
-			 n = new Node(n2.getCargoReference(),n);
-		 }
+		 for (int counter = index; counter > 0 ; counter--) n = new Node (get(counter - 1),n);
+		 Object returnValue = get(index);
 		 headRef = n;
-		 return get(index);	 
+		 return returnValue;	 
 	 }
 
 	 public Object get(int index){
@@ -76,27 +71,16 @@ public class List_inChainOfNodes{
 	 }
 	 
 	 public Object remove(int index){
-		 Node n = getNodeAtIndex(index).getReferenceToNextNode();
-		 for(int counter = 0; counter < index; counter++){
-			 Node n2 = headRef;
-			 for (int i = counter; i<index-1; i++){
-				n2 = n2.getReferenceToNextNode();
-			 }
-			 n = new Node(n2.getCargoReference(),n);
-		 }
+		 Node n = getNodeAtIndex(index).getReferenceToNextNode() ;
+		 for (int counter = index; counter > 0 ; counter--) n = new Node (get(counter - 1),n);
+		 Object returnValue = get(index);
 		 headRef = n;
-		 return get(index);
+		 return returnValue;
 	 }
 	 
 	 public void add(int index, Object val){
 		 Node n = new Node(val, getNodeAtIndex(index));
-		 for(int counter = 0; counter < index; counter++){
-			 Node n2 = headRef;
-			 for (int i = counter; i<index-1; i++){
-				n2 = n2.getReferenceToNextNode();
-			 }
-			 n = new Node(n2.getCargoReference(),n);
-		 }
+		 for (int counter = index; counter > 0 ; counter--) n = new Node (get(counter - 1),n);
 		 headRef = n;
 	 }
 }
